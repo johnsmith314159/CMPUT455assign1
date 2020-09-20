@@ -1,0 +1,48 @@
+def gogui_rules_legal_moves_cmd(self, args):
+        """ Implement this function for Assignment 1 """
+
+        # board_color = args[0].lower()
+        # color = color_to_int(board_color)
+        
+        # if self.gameOver:
+        #     self.respond()
+        # else:
+
+        # ------------- this block under else --------------
+
+        moves = self.board.get_empty_points()
+
+        gtp_moves = []
+        for move in moves:
+            coords = point_to_coord(move, self.board.size)
+            gtp_moves.append(format_point(coords))
+        sorted_moves = " ".join(sorted(gtp_moves))
+        self.respond(sorted_moves)
+
+        #----------------------------------------------------
+
+        return
+
+
+def genmove_cmd(self, args):
+        """ Modify this function for Assignment 1 """
+        """ generate a move for color args[0] in {'b','w'} """
+
+        # should have winner color as int
+
+        board_color = args[0].lower()
+        color = color_to_int(board_color)
+
+        moves = self.board.get_empty_points()
+        np.random.shuffle(moves)
+
+        move_coord = point_to_coord(moves[0], self.board.size)
+        move_as_string = format_point(move_coord)
+
+        # if not self.gameOver:
+        #     self.play_cmd([color, move_as_string])
+        #     self.respond(move_as_string)
+        # elif self.win_color != -1 and self.win_color != color:
+        #     self.respond("resign")
+        # elif moves.length == 0:
+        #    self.respond("pass")
